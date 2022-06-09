@@ -1,3 +1,8 @@
+import "./App.css";
+import React, { useState } from "react";
+import { Login } from "./Components/Login/Login";
+import { CharacterList } from "./Components/CharacterList/CharacterList";
+
 //React application can be represented as a tree of React components
 //This is a react root component
 //This type of components is called functional components
@@ -5,14 +10,12 @@
 //return JSX and be exported from a file
 //try to abstain from default export
 
-import React from "react";
-import { CharacterList } from "./Components/CharacterList/CharacterList";
-import { Login } from "./Components/Login/Login";
+//Let's create a functionality that only when user logged in as admin,
+//we can see the character list, otherwise we see the simple message like
+//"You are not logged in"
 
-//Create a list of characters for sword art game, they should have following properties:
-//name, health, fraction, weapon, damage per hit, render the list of characters
-//in the App component using list
 export const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const header = (
     //we can only use className in JSX, because class is a reserved word in JS
     //JSX can have only one parent element
@@ -20,6 +23,12 @@ export const App = () => {
       <h1 className="jsx-style">Hello, Sword Art Gamers</h1>
       <h3>Welcome</h3>
     </div>
+  );
+
+  const userNotLoggedIn = (
+    <h3 className="not-logged-in">
+      Please log in as admin to see character list
+    </h3>
   );
 
   const transformCharacterToListItem = (character: any) => {
@@ -50,10 +59,8 @@ export const App = () => {
   );
   return (
     <div className="App">
-      <Login />
-      <CharacterList />
+      <Login setLoggedIn={setIsLoggedIn} />
+      {isLoggedIn ? <CharacterList /> : userNotLoggedIn}
     </div>
   );
 };
-
-export default App;
