@@ -1,7 +1,8 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Login } from "./Components/Login/Login";
 import { CharacterList } from "./Components/CharacterList/CharacterList";
+import { useFetch } from "./hooks/useFetch";
 
 //React application can be represented as a tree of React components
 //This is a react root component
@@ -16,37 +17,29 @@ import { CharacterList } from "./Components/CharacterList/CharacterList";
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const { response, error } = useFetch(
+    "https://jsonplaceholdser.typicode.com/posts"
+  );
 
-  // fetching
-  const fetchPosts = async () => {
-    const response = await fetch('https://jsonplaceholder.typcode.com/posts');
-    const json = await response.json();
-    setPosts(json);
-  };
+  if (!response) {
+    return <>Loading...</>;
+  }
 
-  console.log("posts", posts);
-  // UseEffect is a hook that is called after the component is rendered
-  // to perform some kind of side effect e.g data fetching, subscription to events, etc
-  // UseEffect is a function that takes a function as an argument
-  // if dependency array is missing, use effect will be called on every render
-  // When we provide empty dependency array, useEffect will be called only once
-  // When we provide dependencies, if dependencies change, useEffect will be called again
+  if (error && error instanceof Error) {
+    //We can use React.Fragment instead of div
+    //In react we can't render objects or arrays
+    return <>Error: {error.message} </>;
+  }
 
-  useEffect(() => {
-    fetchPosts();
-  }, [isLoggedIn]); 
-  
+  if (response) {
+    console.log(response);
+  }
 
   const userNotLoggedIn = (
     <h3 className="not-logged-in">
       Please log in as admin to see character list
     </h3>
   );
-
-  
-
-  
   return (
     <div className="App">
       <Login setLoggedIn={setIsLoggedIn} />

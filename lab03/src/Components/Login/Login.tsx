@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const adminCredentials = { userName: "admin", password: "admin" };
 
 interface LoginProps {
   setLoggedIn: (isLoggedIn: boolean) => void;
 }
+
 //In React we have two main types of components: stateless and stateful
 //1. User types his login and password and clicks login button
 //2. If the login password combination is correct, the user is redirected to the character list
-
 export const Login = ({ setLoggedIn }: LoginProps) => {
   //Rule 1: we never update the state directly, we always use setState
   //Rule 2: when state changes, the component re-renders
@@ -21,7 +21,7 @@ export const Login = ({ setLoggedIn }: LoginProps) => {
   //You can create even handlers two ways: using an anonymous function
   // or using a named function
   const usernameHandler = (event: any) => {
-    console.log("Events", event);
+    console.log("Event", event);
     setUserName(event.target.value);
   };
 
@@ -35,6 +35,8 @@ export const Login = ({ setLoggedIn }: LoginProps) => {
       setLoggedIn(false);
     }
   };
+  console.log("Component rendered with userName: " + userName);
+
   return (
     <div>
       <label>User name: </label>
