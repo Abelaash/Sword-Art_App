@@ -1,3 +1,8 @@
+import React from "react";
+import { CharacterListItem } from "./CharacterListItem/CharacterListItem";
+import { Table, TableCaption, Thead, Tr, Th, Tbody } from "@chakra-ui/react";
+import "./CharacterList.css";
+
 // Props are passed to the component via attributes
 export const CharacterList = ({ characters }) => {
   //returns true if Math.random() is more than 0.5
