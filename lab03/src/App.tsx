@@ -20,9 +20,9 @@ export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const characters = [
     {
-      name: "Goku",
+      name: "Super Saiyan Goku",
       health: 100,
-      fraction: "Super Saiyan",
+      fraction: "Saiyan",
       weapon: "Ultra Instinct",
       damagePerHit: 10,
     },
@@ -53,6 +53,13 @@ export const App = () => {
       fraction: "Japanese",
       weapon: "Dark Magician",
       damagePerHit: 15,
+    },
+    {
+      name: "Solider Boy",
+      health: 210,
+      fraction: "American Super Villan",
+      weapon: "Superhuman strength/speed",
+      damagePerHit: 4,
     },
   ];
   const { response, error } = useFetch(
