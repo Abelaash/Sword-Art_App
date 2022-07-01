@@ -12,7 +12,7 @@ export const CharacterListItem = ({ character, isChampion }) => {
     //It's required for React to be able to update the element
     <Tr key={name}>
       <Td className="character-name">
-        {isChampion ? `Champion ${name}` : name}
+        {isChampion ? `Competitor ${name}` : name}
       </Td>
       <Td isNumeric>{health}</Td>
       <Td>{fraction}</Td>
