@@ -1,9 +1,9 @@
 import "./App.css";
 import React, { useState } from "react";
 import { Login } from "./Components/Login/Login";
-import { CharacterList } from "./Components/CharacterList/CharacterList";
 import { useFetch } from "./hooks/useFetch";
-import { CharacterSelection } from "./Components/CharacterSelection/CharacterSelection";
+import { CharactersScreen } from "./Components/screens/CharacterScreens";
+import { Battleground } from "./Components/Battleground/Battleground";
 
 //React application can be represented as a tree of React components
 //This is a react root component
@@ -18,6 +18,8 @@ import { CharacterSelection } from "./Components/CharacterSelection/CharacterSel
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isFightGoingOn, setFightStart] = useState(false);
+  const [battleCharacters, setBattleCharacters] = useState([]);
   const characters = [
     {
       name: "Super Saiyan Goku",
@@ -75,17 +77,21 @@ export const App = () => {
     //In react we can't render objects or arrays
     return <>Error: {error.message} </>;
   }
+  console.log("Selected characters", battleCharacters);
 
-  const userNotLoggedIn = (
-    <h3 className="not-logged-in">
-      Please log in as admin to see character list
-    </h3>
-  );
   return (
     <div className="App">
       {!isLoggedIn ? <Login setLoggedIn={setIsLoggedIn} /> : null}
-      {isLoggedIn ? <CharacterList characters={characters} /> : userNotLoggedIn}
-      {isLoggedIn ? <CharacterSelection characters={characters} /> : null}
+      {isLoggedIn && !isFightGoingOn ? (
+        <CharactersScreen
+          characters={characters}
+          setFightStart={setFightStart}
+          setBattleCharacters={setBattleCharacters}
+        />
+      ) : null}
+      {isFightGoingOn ? (
+        <Battleground battleCharacters={battleCharacters} />
+      ) : null}
     </div>
   );
 };

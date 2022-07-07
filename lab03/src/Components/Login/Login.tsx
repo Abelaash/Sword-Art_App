@@ -1,5 +1,6 @@
-import { Button, Flex, Input, Stack, Text } from "@chakra-ui/react";
 import React, { useState, useRef, useEffect } from "react";
+
+import { Button, Input, Flex, Text } from "@chakra-ui/react";
 
 const adminCredentials = { userName: "admin", password: "admin" };
 
@@ -42,7 +43,6 @@ export const Login = ({ setLoggedIn }: LoginProps) => {
   // or using a named function
   const usernameHandler = (event: any) => {
     countRef.current++;
-    console.log("Count", countRef.current);
     setUserName(event.target.value);
   };
 
