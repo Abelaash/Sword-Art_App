@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Login } from "./Components/Login/Login";
 import { useFetch } from "./hooks/useFetch";
 import { CharactersScreen } from "./Components/screens/CharacterScreens";
@@ -56,13 +56,7 @@ export const App = () => {
       weapon: "Dark Magician",
       damagePerHit: 15,
     },
-    {
-      name: "Solider Boy",
-      health: 210,
-      fraction: "American Super Villan",
-      weapon: "Superhuman strength/speed",
-      damagePerHit: 4,
-    },
+    
   ];
   const { response, error } = useFetch(
     "https://jsonplaceholder.typicode.com/posts"
@@ -89,8 +83,18 @@ export const App = () => {
           setBattleCharacters={setBattleCharacters}
         />
       ) : null}
-      {isFightGoingOn ? (
-        <Battleground battleCharacters={battleCharacters} />
+
+      {isFightGoingOn && !winner ? (
+        <Battleground
+          winner={winner}
+          setWinner={setWinner}
+          battleCharacters={battleCharacters}
+        />
+      ) : null}
+      {isFightGoingOn && winner ? (
+        <Text fontSize={"5xl"} fontWeight="800">
+          Winner of the battle is {winner}
+        </Text>
       ) : null}
     </div>
   );
