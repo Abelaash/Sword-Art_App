@@ -26,7 +26,7 @@ export const App = () => {
       name: "Super Saiyan Goku",
       health: 100,
       fraction: "Saiyan",
-      weapon: "Ki",
+      weapon: "Vegito",
       damagePerHit: 10,
     },
     {
