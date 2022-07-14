@@ -64,7 +64,7 @@ export const App = () => {
     //In react we can't render objects or arrays
     return <>Error: {error.message} </>;
   }
-  console.log("Selected characters", battleCharacters);
+  console.log("Selected Champions", battleCharacters);
 
   return (
     <div className="App">
@@ -84,8 +84,8 @@ export const App = () => {
         />
       ) : null}
       {isFightGoingOn && winner ? (
-        <Text fontSize={"5xl"} fontWeight="800">
-          Winner of the battle is {winner}
+        <Text fontSize={"5xl"} fontWeight="800" color="green">
+          Winner is {winner} !!
         </Text>
       ) : null}
     </div>
