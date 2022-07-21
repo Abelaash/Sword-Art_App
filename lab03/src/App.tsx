@@ -8,6 +8,7 @@ import { BattlegroundScreen } from "./screens/BattlegroundScreen";
 import { WinnerScreen } from "./screens/WinnerScreen";
 import { LoginScreen } from "./screens/LoginScreen";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 //React application can be represented as a tree of React components
 //This is a react root component
 //This type of components is called functional components
@@ -21,38 +22,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [battleCharacters, setBattleCharacters] = useState([]);
   const [winner, setWinner] = useState(null);
-  const characters = [
-    {
-      name: "Super Saiyan Goku",
-      health: 100,
-      fraction: "Saiyan",
-      weapon: "Vegito",
-      damagePerHit: 10,
-    },
-    {
-      name: "Tanijro Kamado",
-      health: 100,
-      fraction: "Japanese",
-      weapon: "Demon Sword",
-      damagePerHit: 8,
-    },
-    {
-      name: "Yugi Itadori",
-      health: 100,
-      fraction: "Japanese",
-      weapon: "Slaughter Demon",
-      damagePerHit: 15,
-    },
-    {
-      name: "Izuku Midoriya",
-      health: 150,
-      fraction: "Japanese",
-      weapon: "One For All",
-      damagePerHit: 15,
-    },
-  ];
   const { response, error } = useFetch(
     "https://jsonplaceholder.typicode.com/posts"
   );
@@ -66,7 +36,6 @@ export const App = () => {
     //In react we can't render objects or arrays
     return <>Error: {error.message} </>;
   }
-  console.log("Selected Champions", battleCharacters);
 
   return (
     <div className="App">
@@ -78,13 +47,7 @@ export const App = () => {
           />
           <Route
             path="/characters"
-            element={
-              <CharactersScreen
-                isLoggedIn={isLoggedIn}
-                characters={characters}
-                setBattleCharacters={setBattleCharacters}
-              />
-            }
+            element={<CharactersScreen isLoggedIn={isLoggedIn} />}
           />
           <Route
             path="/winner"
@@ -97,7 +60,6 @@ export const App = () => {
                 isLoggedIn={isLoggedIn}
                 setWinner={setWinner}
                 winner={winner}
-                battleCharacters={battleCharacters}
               />
             }
           />

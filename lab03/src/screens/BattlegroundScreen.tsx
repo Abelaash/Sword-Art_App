@@ -1,9 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
-import { useInterval } from "../hooks/useInterval";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useInterval } from "../hooks/useInterval";
 
-export const BattlegroundScreen = ({ isLoggedIn, battleCharacters, setWinner, winner }) => {
+export const BattlegroundScreen = ({
+  isLoggedIn,
+  setWinner,
+  winner,
+}) => {
+  const battleCharacters = useSelector((store: any) => store.characters.battleCharacters);
   const [fighterOne, fighterTwo] = battleCharacters;
   const [firstAttacks, setFirstAttacks] = useState(false);
   const [secondAttacks, setSecondAttacks] = useState(false);
@@ -11,9 +17,9 @@ export const BattlegroundScreen = ({ isLoggedIn, battleCharacters, setWinner, wi
   const attacksByFighterTwo = useRef(0);
   const navigate = useNavigate();
 
-  if (!isLoggedIn){
-    navigate("/login");
-}
+  if (!isLoggedIn) {
+    navigate("/");
+  }
 
   const handleFightersClash = () => {
     const { name, damagePerHit } = fighterOne;
