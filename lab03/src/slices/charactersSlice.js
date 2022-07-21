@@ -5,25 +5,33 @@ export const charactersSlice = createSlice({
     initialState: {
     characterList: [
       {
-        name: "Goku",
+        name: "Super Saiyan Goku",
         health: 100,
         fraction: "Saiyan",
         weapon: "Ki",
         damagePerHit: 25,
       },
       {
-        name: "Bobrik",
-        health: 150,
-        fraction: "Random",
-        weapon: "Bow",
+        name: "Tanijro Kamado",
+        health: 80,
+        fraction: "Villager",
+        weapon: "Nichirin Katana",
         damagePerHit: 19,
       },
       {
-        name: "Valera",
-        health: 80,
-        fraction: "Ukraine",
-        weapon: "Tanto",
+        name: "Izuku Midoriya",
+        health: 150,
+        fraction: "Japanese",
+        weapon: "One For All",
+        damagePerHit: 10,
+      },
+      {
+        name: "Yugi Muto",
+        health: 50,
+        fraction: "Student",
+        weapon: "Dark Magician",
         damagePerHit: 15,
+
       },
     ],
     battleCharacters: [],
