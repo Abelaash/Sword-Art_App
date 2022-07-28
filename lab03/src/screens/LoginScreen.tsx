@@ -2,17 +2,17 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { Button, Input, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
+import {useDispatch} from "react-redux"
+import { setIsLoggedIn } from "../slices/loginSlice";
 const adminCredentials = { userName: "admin", password: "admin" };
 
-interface LoginProps {
-  setLoggedIn: (isLoggedIn: boolean) => void;
-}
+
+
 
 //In React we have two main types of components: stateless and stateful
 //1. User types his login and password and clicks login button
 //2. If the login password combination is correct, the user is redirected to the character list
-export const LoginScreen = ({ setLoggedIn }: LoginProps) => {
+export const LoginScreen = () => {
   //Rule 1: we never update the state directly, we always use setState
   //Rule 2: when state changes, the component re-renders
   //Rule 3: setState is asynchronous, it doesn't block the execution of the code
@@ -21,7 +21,7 @@ export const LoginScreen = ({ setLoggedIn }: LoginProps) => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   //countRef.current is a reference to the current value of count, e.g 0
   //1) Value of the reference is persistent across re-renders
   //2) Changing value of the reference doesn't cause component to re-render
@@ -54,10 +54,10 @@ export const LoginScreen = ({ setLoggedIn }: LoginProps) => {
       userName === adminCredentials.userName &&
       password === adminCredentials.password
     ) {
-      setLoggedIn(true);
+      dispatch(setIsLoggedIn(true));
       navigate("/characters");
     } else {
-      setLoggedIn(false);
+      dispatch(setIsLoggedIn(false));
     }
   };
 

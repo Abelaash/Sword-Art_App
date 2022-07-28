@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { useInterval } from "../hooks/useInterval";
 
 export const BattlegroundScreen = ({
-  isLoggedIn,
   setWinner,
   winner,
 }) => {
@@ -17,6 +16,7 @@ export const BattlegroundScreen = ({
   const attacksByFighterTwo = useRef(0);
   const navigate = useNavigate();
 
+  const isLoggedIn = useSelector((store: any) => store.login.isLoggedIn);
   if (!isLoggedIn) {
     navigate("/");
   }

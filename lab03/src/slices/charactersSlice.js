@@ -1,5 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+//Slice in redux is a container that holds the state of the part of the application
+//provides actions and reducers to manage the state
 export const charactersSlice = createSlice({
     name: "characters",
     initialState: {
