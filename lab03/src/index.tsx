@@ -5,7 +5,7 @@ import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { App } from "./App";
 import { Provider } from "react-redux";
-import store from "./screens/store";
+import {store} from "./store";
 
 
 //Creates a root element in the DOM

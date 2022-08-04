@@ -1,41 +1,22 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+//CreateAsyncTunk is a function that allows us to get data asynchrously
+// It takes type and a function that returns a promise
+// Type has to be of the slice, slash, name of the action
+export const getCharacters = createAsyncThunk('characters/getCharacters', async () => {
+  const response = await fetch('http://localhost:3000/characters');
+  const data = await response.json();
+  return data;
+})
+
 //Slice in redux is a container that holds the state of the part of the application
 //provides actions and reducers to manage the state
 export const charactersSlice = createSlice({
-    name: "characters",
-    initialState: {
-    characterList: [
-      {
-        name: "Super Saiyan Goku",
-        health: 100,
-        fraction: "Saiyan",
-        weapon: "Ki",
-        damagePerHit: 25,
-      },
-      {
-        name: "Tanijro Kamado",
-        health: 80,
-        fraction: "Villager",
-        weapon: "Nichirin Katana",
-        damagePerHit: 19,
-      },
-      {
-        name: "Izuku Midoriya",
-        health: 150,
-        fraction: "Japanese",
-        weapon: "One For All",
-        damagePerHit: 10,
-      },
-      {
-        name: "Yugi Muto",
-        health: 50,
-        fraction: "Student",
-        weapon: "Dark Magician",
-        damagePerHit: 15,
-
-      },
-    ],
+  name: "characters",
+  initialState: {
+    characterList: [],
+    status: "idle",
+    error: null,
     battleCharacters: [],
   },
   reducers: {
@@ -50,6 +31,20 @@ export const charactersSlice = createSlice({
         battleCharacters: action.payload,
       };
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getCharacters.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getCharacters.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.characterList = action.payload;
+      })
+      .addCase(getCharacters.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error;
+      });
   },
 });
 
