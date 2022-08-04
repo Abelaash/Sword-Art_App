@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
 //CreateAsyncTunk is a function that allows us to get data asynchrously
 // It takes type and a function that returns a promise
