@@ -1,12 +1,10 @@
-import "./App.css";
 import { useState } from "react";
-
-import { useFetch } from "./hooks/useFetch";
-import { CharacterScreen } from "./screens/CharacterScreen";
-import { BattlegroundScreen } from "./screens/BattlegroundScreen";
-
-import { WinnerScreen } from "./screens/WinnerScreen";
-import { LoginScreen } from "./screens/LoginScreen";
+import { useFetch } from "../hooks/useFetch";
+import "./App.css";
+import { CharactersScreen } from "../screens/CharactersScreen";
+import { WinnerScreen } from "../screens/WinnerScreen";
+import { LoginScreen } from "../screens/LoginScreen";
+import { BattlegroundScreen } from "../screens/BattlegroundScreen";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 //React application can be represented as a tree of React components
@@ -42,11 +40,11 @@ export const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<LoginScreen/>}
+            element={<LoginScreen />}
           />
           <Route
             path="/characters"
-            element={<CharacterScreen  />}
+            element={<CharactersScreen/>}
           />
           <Route
             path="/winner"
@@ -56,7 +54,6 @@ export const App = () => {
             path="/battleground"
             element={
               <BattlegroundScreen
-                
                 setWinner={setWinner}
                 winner={winner}
               />

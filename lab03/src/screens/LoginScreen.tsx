@@ -2,11 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { Button, Input, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import { setIsLoggedIn } from "../slices/loginSlice";
+
 const adminCredentials = { userName: "admin", password: "admin" };
-
-
 
 
 //In React we have two main types of components: stateless and stateful
@@ -20,8 +19,11 @@ export const LoginScreen = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  //This hook is used to navigate to other pages
+  const navigate = useNavigate();
+
   //countRef.current is a reference to the current value of count, e.g 0
   //1) Value of the reference is persistent across re-renders
   //2) Changing value of the reference doesn't cause component to re-render
@@ -54,8 +56,8 @@ export const LoginScreen = () => {
       userName === adminCredentials.userName &&
       password === adminCredentials.password
     ) {
-      dispatch(setIsLoggedIn(true));
       navigate("/characters");
+      dispatch(setIsLoggedIn(true));
     } else {
       dispatch(setIsLoggedIn(false));
     }
