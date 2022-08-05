@@ -1,15 +1,27 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-//CreateAsyncTunk is a function that allows us to get data asynchrously
-// It takes type and a function that returns a promise
-// Type has to be of the slice, slash, name of the action
-export const getCharacters = createAsyncThunk('characters/getCharacters', async () => {
-  const response = await fetch('http://localhost:3000/characters');
-  const data = await response.json();
-  return data;
-})
+//createAsyncThunk is a function that allows us to get data asynchronously
+//It takes type and a function that returns a promise
+//Type has to be name of the slice, slash, name of the action
+export const getCharacters = createAsyncThunk(
+  "characters/getCharacters",
+  async () => {
+    const response = await fetch("http://localhost:8080/characters");
+    const data = await response.json();
+    return data;
+  }
+);
 
-//Slice in redux is a container that holds the state of the part of the application
+//Let me descrive redux data flow:
+//1. We click on a button that triggers an action
+//2. The action is dispatched to the store (we need to provide type and payload)
+//3. The store dispatches the action to all the reducers
+//4. Correct reducer is called and the state is updated
+//5. The component is re-rendered
+
+//The breakdown of remaining marks will be: 10, 10, 25
+
+//Slice in redux is a container that holds the state of the part of the application,
 //provides actions and reducers to manage the state
 export const charactersSlice = createSlice({
   name: "characters",
@@ -52,6 +64,3 @@ export const charactersSlice = createSlice({
 export const { setBattleCharacters } = charactersSlice.actions;
 
 export default charactersSlice.reducer;
-
-
-

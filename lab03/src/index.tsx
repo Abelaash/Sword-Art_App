@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 //we check directory relative to the file
 import { ChakraProvider } from "@chakra-ui/react";
-import { App } from "./App";
+import { App } from "./Components/App";
 import { Provider } from "react-redux";
 import {store} from "./store";
 

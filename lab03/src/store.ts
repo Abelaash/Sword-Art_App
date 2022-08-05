@@ -10,10 +10,8 @@ import loginReducer from './slices/loginSlice'
 export const store = configureStore({
   reducer: {
     characters: charactersReducer,
-    loginSlice: loginReducer,
+    login: loginReducer,
   },
-
-  
 })
 
 export type RootState = ReturnType<typeof store.getState>
