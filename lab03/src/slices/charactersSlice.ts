@@ -53,6 +53,16 @@ export const addCharacter = createAsyncThunk(
   }
 );
 
+export const updateCharacter = createAsyncThunk(
+  "characters/updateCharacter",
+  async (character: Character) => {
+    const response = await axios.post(
+      "http://localhost:8080/characters/`{id}`",
+      character
+    );
+    return response.data;
+  }
+)
 //Let me descrive redux data flow:
 //1. We click on a button that triggers an action
 //2. The action is dispatched to the store (we need to provide type and payload)
@@ -115,9 +125,26 @@ export const charactersSlice = createSlice({
       .addCase(addCharacter.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error;
-      });
+      })
+      .addCase(updateCharacter.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(updateCharacter.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.characterList.push(action.payload);
+      })
+      .addCase(updateCharacter.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error;
+      })
+      
   },
+
+  
+
+  
 });
+
 
 // Action creators are generated for each case reducer function
 export const { setBattleCharacters, setCharacterToUpdate } = charactersSlice.actions;

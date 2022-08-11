@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/redux";
-import { addCharacter, Character } from "../slices/charactersSlice";
+import { addCharacter, Character, updateCharacter } from "../slices/charactersSlice";
 
 //Tips to do update
 //1. Make sure you provide id when you update the character (url should look like 
@@ -60,6 +60,18 @@ export const AddCharacterScreen = () => {
     navigate("/characters");
   };
 
+  const handleCharacterToUpdate = () => {
+    if(!validateValues){
+      return;
+    }
+    setIsAlertVisible(false);
+    const characterToUpdate = {
+      name,
+    };
+    dispatch(updateCharacter(characterToUpdate as Character));
+    navigate("/manageCharacters")
+  };
+
   const alert = (
     <Alert status="error">
       <AlertIcon />
@@ -99,7 +111,12 @@ export const AddCharacterScreen = () => {
         placeholder="Please enter a character weapon"
       />
       <Button onClick={handleCharacterAddition}>
-        {character ? "Update Character" : "Add Character"}
+        {character ? "Add Character" : "Update Character"}
+        
+      </Button>
+      <Button onClick={handleCharacterToUpdate}>
+        {character ? "Add Character" : "Delete Character"}
+        
       </Button>
       {isAlertVisible && alert}
     </Stack>
