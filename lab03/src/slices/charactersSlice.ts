@@ -11,8 +11,8 @@ export interface Character {
 }
 
 export interface CharactersState {
-  characterList: Character[];
-  characterToUpdate: Character | null;
+  characterList: Character[],
+  characterToUpdate: null;
   status: string;
   error: any;
   battleCharacters: Character[];
@@ -104,6 +104,7 @@ export const charactersSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+    //get Character
       .addCase(getCharacters.pending, (state, action) => {
         state.status = "loading";
       })
@@ -115,6 +116,7 @@ export const charactersSlice = createSlice({
         state.status = "failed";
         state.error = action.error;
       })
+      //AddCharacter
       .addCase(addCharacter.pending, (state, action) => {
         state.status = "loading";
       })
@@ -126,6 +128,7 @@ export const charactersSlice = createSlice({
         state.status = "failed";
         state.error = action.error;
       })
+      //UpDateCharacter
       .addCase(updateCharacter.pending, (state, action) => {
         state.status = "loading";
       })
