@@ -61,15 +61,11 @@ export const AddCharacterScreen = () => {
   };
 
   const handleCharacterToUpdate = () => {
-    if(!validateValues){
-      return;
-    }
-    setIsAlertVisible(false);
     const characterToUpdate = {
-      name,
+      name, 
+      
     };
     dispatch(updateCharacter(characterToUpdate as Character));
-    navigate("/manageCharacters")
   };
 
   const alert = (
@@ -110,11 +106,9 @@ export const AddCharacterScreen = () => {
         onChange={(e) => setWeapon(e.target.value)}
         placeholder="Please enter a character weapon"
       />
-      <Button onClick={handleCharacterAddition}>
-        {character ? "Update Character" : "Add Character" }
-        
+      <Button onClick={character ? handleCharacterAddition : handleCharacterToUpdate}>
+        {character ? "Add Character" : "Update Character"}
       </Button>
-      
       {isAlertVisible && alert}
     </Stack>
   );
